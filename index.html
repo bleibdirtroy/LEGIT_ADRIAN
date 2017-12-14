@@ -6,16 +6,18 @@
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 	<link rel="stylesheet" href="style.css" type="text/css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://unpkg.com/vue"></script>
-	<script src="https://unpkg.com/vue-resource"></script>
-	<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-	<script src="skript.js"></script>
+	<script src="https://unpkg.com/vue" ></script>
+	<script src="https://unpkg.com/vue-resource" ></script>
+	<script src="https://unpkg.com/vue-router/dist/vue-router.js" ></script>
+	
 	<title>LEGIT</title>
 </header>
 
 
 <body>
+	<script src="skript.js" defer></script>
 	<div class="page">
 
 		<div class="navigation">
@@ -32,16 +34,16 @@
 			</ul>
 		</div>
 
-		<div id="rest">fgf
+		<div id="rest">
 
 			<div class="witzspalte">
 				<div class="witze-div" v-for="witz in witze">
 					<table class="joke-tabelle">
 
 						<tr>
-							<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click.once="witz.Upvotes += 1"></i></td>
+							<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="witz.UPvotes += 1"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
 							<td>{{ witz.Content }}</td>
-							<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click.once="witz.Downvotes += 1"></i></td>
+							<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="witz.Downvotes += 1"></i></td>
 						</tr>
 						<tr>
 							<td>{{ witz.Upvotes }}</td>
@@ -74,7 +76,7 @@
 					<button>In <span class="button1">LEGIT</span> posten?</button>
 					<select class="select_categroy">
 						<option value="Kategorie auswählen" disabled selected>Kategorie auswählen</option>
-						<option v-bind:value="category" v-for="category in category_select">{{ category }}</option>
+						<option v-bind:value="category" v-for="category in category_select">{{ category.Name }}</option>
 					</select>
 
 
@@ -85,148 +87,4 @@
 
 		</div>			<!--Rest unter der Menuleiste-->
 	</div>
-
-
-	<script>
-
-
-		var lustig = new Vue({
-			el: ".witzspalte",
-			data: {
-				witze: [],
-			},
-			mounted: function() {
-
-				this.$http.get('https://legitjokes.herokuapp.com/api/joke?category=1')
-				.then(function(resp) {
-					this.$data.witze = resp.body.data;
-
-				})
-				.catch(function(resp){
-					this.$data.witze = "Something went wrong: " + err
-				})
-
-
-
-			}
-
-
-
-		})
-
-		var category = new Vue({
-			el: ".navigation",
-
-			data: {
-				categories: [],
-				cate:[],
-				rechteSeite: true,
-			},
-
-
-			mounted: function() {
-				this.$http.get('https://legitjokes.herokuapp.com/api/categories')
-				.then(function(resp) {
-					this.$data.categories = resp.body.data;
-					for (var i of this.$data.categories) {
-						this.$data.cate.push({Name: i.Category,ID: i.CategoryID});  
-
-					}
-				})
-				.catch(function(err) {
-					this.$data.random_witz = "Something went wrong: " + err
-				})		
-			},
-			methods: {
-				switching(){
-					veraenderung.$data.rechteSeite = false;
-					this.$data.rechteSeite = false;
-					
-				},
-				back_switching(){
-					veraenderung.$data.rechteSeite = true;
-					this.$data.rechteSeite = true;
-
-
-				},
-
-				wechsel(id){
-					
-				console.log(id)
-				this.$http.get('https://legitjokes.herokuapp.com/api/joke?category=' + id )
-				.then(function(resp) {
-					
-
-					lustig.$data.witze = resp.body.data;
-
-				})
-				.catch(function(resp){
-					lustig.$data.witze = "Something went wrong: " + err
-				})
-				}
-
-			}
-			
-
-
-
-		})
-
-
-
-		var veraenderung = new Vue({
-			el: ".rechts",
-
-			data: {
-				zeit: 0,
-				coins: 6,
-				random_witz: "Hallo user",
-				rechteSeite: true,
-				category_select: []
-
-
-		//coins = hier vom Server,
-	},
-	mounted: function(){
-		this.$data.category_select = category.$data.cate;
-	},
-
-	methods: {
-
-		zufall(){
-			this.$data.zeit = 1;
-			ruecksetzung();
-
-      			//für unsere API:
-
-      			this.$http.get('https://legitjokes.herokuapp.com/api/joke/random')
-      			.then(function(resp) {
-      				this.$data.random_witz = resp.body.data.Content
-
-      		//this.$data.random_witz = resp.body.data.Content
-
-      	})
-
-      			.catch(function(err) {
-      				this.$data.random_witz = "Something went wrong: " + err
-      			})		
-      		}, 
-
-      	}
-
-      });
-
-		var timer;
-
-		function ruecksetzung() {
-			timer = setTimeout(change_back, 1300);
-		}
-
-		function change_back(){
-			veraenderung.$data.zeit = 0;
-		}
-
-
-
-	</script>
 </body>
