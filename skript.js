@@ -173,7 +173,7 @@ var automat = new Vue({
 
 	data: {
 		zeit: 0,
-		coins: 6, //an´passen
+		coins: 6, //anpassen
 		random_witz: "Hallo user",
 		rechteSeite: true,
 
@@ -201,7 +201,6 @@ var automat = new Vue({
       			.then(function(resp) {
       				this.$data.random_witz = resp.body.data.Content
 
-      		//this.$data.random_witz = resp.body.data.Content
 
       	})
 
@@ -227,6 +226,6 @@ function ruecksetzung() {
 //Die Zeit wird zurück gesetz, damit der Automat sich nicht bewegt!
 
 function change_back(){
-	veraenderung.$data.zeit = 0;
+	automat.$data.zeit = 0;
 }
 
