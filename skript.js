@@ -3,24 +3,80 @@
 			el: ".witzspalte",
 			data: {
 				witze: [],
+				token: null,
 			},
-			mounted: function() {
 
-				this.$http.get('https://legitjokes.herokuapp.com/api/joke?category=1')
-				.then(function(resp) {
-					this.$data.witze = resp.body.data;
+			mounted: function(){
 
-				})
-				.catch(function(resp){
-					this.$data.witze = "Something went wrong: " + err
-				})
+				this.$data.token = "Bearer "
+				
+				//this.$data.token = localStorage.getItem("token"); //hier Key von Amir einfügen!!
+				this.$data.token += "eyJhbGciOiJIUzI1NiJ9.TGl0X2JveTY5.EM2R45WtYCgJrIe0zcNPg9yStoEsSwEHudxWA9NlaB8"; //noch meiner
+				console.log(this.$data.token);
 
+			},
+
+			methods:{
+
+				upvote(id){
+						this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=up',
+						{
+							headers: {
+								'Authorization': this.$data.token,
+							}
+						})
+						.then(function(resp){
+							//automat.$data.coins += 1;
+							//credit_change(up);
+
+							console.log(resp);
+						})
+						.catch(function(err){
+							console.log("FEHLER");
+						})
+
+				},
+
+				downvote(id){
+					this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=down',
+					{
+						headers: {
+							'Authorization': this.$data.token,
+
+						}
+					})
+					.then(function(resp){
+						//automat.$data.coins -= 1;
+						//credit_change(down);
+
+						console.log(resp);
+					})
+					.catch(function(err){
+							console.log("FEHLER");
+						})
+
+				},
+
+				/*credit_change(type){
+					this.$http.get('https://legitjokes.herokuapp.com/api/user/coins?type=' + type,
+					{
+						headers: {
+							'Authorization': this.$data.token,
+
+						}
+					})
+					.then(function(resp){
+						console.log(resp);
+					})
+					.catch(function(err){
+							console.log("FEHLER");
+						})
+
+
+				},*/
 
 
 			}
-
-
-
 		})
 
 		var category = new Vue({
@@ -48,12 +104,12 @@
 			},
 			methods: {
 				switching(){
-					veraenderung.$data.rechteSeite = false;
+					automat.$data.rechteSeite = false;
 					this.$data.rechteSeite = false;
 					
 				},
 				back_switching(){
-					veraenderung.$data.rechteSeite = true;
+					automat.$data.rechteSeite = true;
 					this.$data.rechteSeite = true;
 
 
@@ -61,7 +117,7 @@
 
 				wechsel(id){
 					
-				console.log(id)
+				
 				this.$http.get('https://legitjokes.herokuapp.com/api/joke?category=' + id )
 				.then(function(resp) {
 
@@ -83,7 +139,7 @@
 
 
 
-		var veraenderung = new Vue({
+		var automat = new Vue({
 			el: ".rechts",
 
 			data: {
@@ -98,6 +154,8 @@
 	},
 	mounted: function(){
 		this.$data.category_select = category.$data.cate;
+		//this.$data.coins = localStorage.getItem("coins"); //Coins von Amir
+
 	},
 
 	methods: {

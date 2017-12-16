@@ -16,7 +16,7 @@ li{
   font-size: 40px;
   text-decoration: none;
   color: white;
-  padding: 14px 54px
+  padding: 14px 54px;
 }
 
 #navbar{						
@@ -35,7 +35,7 @@ li{
 	float: left;
 }
 
-#create{
+.create{
 	cursor: url('aero-middle-finger.cur'), pointer;
 	width: 10%;
 	-webkit-touch-callout: none;
@@ -44,6 +44,19 @@ li{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.navitem_logo{
+	float: left;
+	color: white;
+	display: block;
+	text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 40px;
+    text-decoration: none;
+    
+
+
 }
 
 .navitem{

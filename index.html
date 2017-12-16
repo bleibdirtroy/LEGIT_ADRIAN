@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<header>
+<head>
 	<meta charset="UTF-8">
 
 	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
@@ -13,7 +13,7 @@
 	<script src="https://unpkg.com/vue-router/dist/vue-router.js" ></script>
 	
 	<title>LEGIT</title>
-</header>
+</head>
 
 
 <body>
@@ -22,13 +22,13 @@
 
 		<div class="navigation">
 			<ul id="navbar">
-				<li class="navpoint"><a href="#home" class="logo" class="navitem">LEGIT</a></li>
+				<li class="navpoint"><a href="#home" class="navitem_logo">LEGIT</a></li>
 			
-					<li class="navitem" id="create" v-if="rechteSeite" v-on:click="switching">Witz schreiben</li>
+					<li class="navitem" class="create" v-if="rechteSeite" v-on:click="switching">Witz schreiben</li>
 					
-					<li class="navitem" id="create" v-if="!(rechteSeite)" v-on:click="back_switching">Automat anzeigen</li>
+					<li class="navitem" class="create" v-if="!(rechteSeite)" v-on:click="back_switching">Automat anzeigen</li>
 					
-				<li v-for="category in cate" class="navpoint"><span href="#witz" class="navitem" v-on:click="wechsel(category.ID)">{{ category.Name }}</span></li> <!--verlinkung geht noch nicht-->
+				<li v-for="category in cate" class="navpoint"><span class="navitem" v-on:click="wechsel(category.ID)">{{ category.Name }}</span></li>
 				<li class="navpoint" id="username">USERNAME</li>			<!--Menuleiste oben-->
 
 			</ul>
@@ -41,9 +41,9 @@
 					<table class="joke-tabelle">
 
 						<tr>
-							<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="witz.UPvotes += 1"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
+							<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="upvote(witz.JokeID)"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
 							<td>{{ witz.Content }}</td>
-							<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="witz.Downvotes += 1"></i></td>
+							<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="downvote(witz.JokeID)"></i></td>
 						</tr>
 						<tr>
 							<td>{{ witz.Upvotes }}</td>
@@ -58,11 +58,11 @@
 			<div class="rechts">
 				<div class="container" v-if="rechteSeite">
 
-					<div v-if="(zeit == 0 && coins > 0)" class="hebel" v-on:click="zufall" ref="knuppel"></div>
-					<img v-if="(zeit == 0 && coins > 0)" class="automat" src="random/Automat_oben.jpg" alt="Automat hebel oben" ref="automatoben">
+					<div v-if="(zeit == 0 && coins > 0)" class="hebel" v-on:click="zufall"></div>
+					<img v-if="(zeit == 0 && coins > 0)" class="automat" src="random/Automat_oben.jpg" alt="Automat hebel oben">
 					<img v-if="zeit > 0" class="automat" src="random/Automat.gif" alt="Automat in Bewegung"> 	<!--Automat mit Coins-->
 					<img v-if="coins == 0" class="automat" src="random/Automat_leer.jpg" alt="Automat ohne Geld"> <!--Automat ohne Coins-->
-					<div v-if="zeit == 0" class="random_joke_feld" ref="witz_feld">
+					<div v-if="zeit == 0" class="random_joke_feld">
 						{{ random_witz }}
 					</div>					<!-- Random witz im Automat-->
 					<div class="credit">10</div>
