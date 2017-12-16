@@ -1,4 +1,6 @@
 
+//Vue für die linke Spalte in der die Witze stehen
+
 var lustig = new Vue({
 	el: ".witzspalte",
 	data: {
@@ -7,6 +9,9 @@ var lustig = new Vue({
 	},
 
 	mounted: function(){
+
+		//Speichert Token vom Benutzer
+
 
 		this.$data.token = "Bearer "
 
@@ -18,6 +23,8 @@ var lustig = new Vue({
 
 			methods:{
 
+				//Wenn ein Witz Positiv bewertet wird
+
 				upvote(id){
 					this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=up',
 					{
@@ -26,8 +33,10 @@ var lustig = new Vue({
 						}
 					})
 					.then(function(resp){
-						automat.$data.coins += 1;
 
+						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
+
+						automat.$data.coins += 1;
 						this.$http.get('https://legitjokes.herokuapp.com/api/user/coins?type=up',
 						{
 							headers: {
@@ -52,6 +61,8 @@ var lustig = new Vue({
 
 				},
 
+				//Wenn der Witz negativ bewertet wird
+
 				downvote(id){
 					this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=down',
 					{
@@ -61,8 +72,10 @@ var lustig = new Vue({
 						}
 					})
 					.then(function(resp){
-						automat.$data.coins -= 1;
 						
+						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
+
+						automat.$data.coins += 1;
 						this.$http.get('https://legitjokes.herokuapp.com/api/user/coins?type=up',
 						{
 							headers: {
@@ -76,7 +89,7 @@ var lustig = new Vue({
 						.catch(function(err){
 							console.log("FEHLER in coins");
 						})
-						
+
 
 						console.log(resp);
 					})
@@ -84,28 +97,18 @@ var lustig = new Vue({
 						console.log(err);
 						console.log("fehler downvote");
 					})
-
-				},
-
-				
-
-				increase_coins(){
-					
-				},
-
-				
-			},
-
-
-			
+				},	
+			},			
 		})
+
+
+//Vue für die Navigationsleiste
 
 var category = new Vue({
 	el: ".navigation",
 
 	data: {
-		categories: [],
-		cate:[],
+		categories: [], //Array mit den JSON daten von den Kategorien
 		rechteSeite: true,
 	},
 
@@ -114,10 +117,6 @@ var category = new Vue({
 		this.$http.get('https://legitjokes.herokuapp.com/api/categories')
 		.then(function(resp) {
 			this.$data.categories = resp.body.data;
-			for (var i of this.$data.categories) {
-				this.$data.cate.push({Name: i.Category,ID: i.CategoryID});  
-
-			}
 		})
 		.catch(function(err) {
 			this.$data.random_witz = "Something went wrong: " + err

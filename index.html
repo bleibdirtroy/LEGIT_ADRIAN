@@ -28,7 +28,7 @@
 					
 					<li class="navitem" class="create" v-if="!(rechteSeite)" v-on:click="back_switching">Automat anzeigen</li>
 					
-				<li v-for="category in cate" class="navpoint"><span class="navitem" v-on:click="wechsel(category.ID)">{{ category.Name }}</span></li>
+				<li v-for="category in categories" class="navpoint"><span class="navitem" v-on:click="wechsel(category.CategoryID)">{{ category.Category }}</span></li>
 				<li class="navpoint" id="username">USERNAME</li>			<!--Menuleiste oben-->
 
 			</ul>
