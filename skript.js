@@ -112,6 +112,7 @@ var category = new Vue({
 		rechteSeite: true,
 	},
 
+	//Kategorien werden vom Datenbank geladen
 
 	mounted: function() {
 		this.$http.get('https://legitjokes.herokuapp.com/api/categories')
@@ -123,17 +124,25 @@ var category = new Vue({
 		})		
 	},
 	methods: {
+
+		//Wechsel zum Feld "Witz schreiben" auf der Rechten seite beim Klick auf den Button in der Menüleiste
+
 		switching(){
 			automat.$data.rechteSeite = false;
 			this.$data.rechteSeite = false;
 
 		},
+
+		//Wechsel zurück auf den Automaten durck Klicken auf den Button in der Menüleiste
+
 		back_switching(){
 			automat.$data.rechteSeite = true;
 			this.$data.rechteSeite = true;
 
 
 		},
+
+		//Wechselt in die jeweilige Kategorie druch klicken auf das entsprechende Feld!
 
 		wechsel(id){
 
@@ -157,28 +166,30 @@ var category = new Vue({
 
 })
 
-
+//Vue für den Automaten auf der rechten Seite
 
 var automat = new Vue({
 	el: ".rechts",
 
 	data: {
 		zeit: 0,
-		coins: 6,
+		coins: 6, //an´passen
 		random_witz: "Hallo user",
 		rechteSeite: true,
-		category_select: []
-
 
 		//coins = hier vom Server,
 	},
+
+
 	mounted: function(){
-		this.$data.category_select = category.$data.cate;
+		
 		//this.$data.coins = localStorage.getItem("coins"); //Coins von Amir
 
 	},
 
 	methods: {
+
+		//Zufälliger Witz im Automaten wird von Datenbank ausgewählt
 
 		zufall(){
 			this.$data.zeit = 1;
@@ -203,11 +214,17 @@ var automat = new Vue({
 
       });
 
+
+
 var timer;
+
+//Der Timer für die Zeit in der der Automat seinen Hebel nach unten bewegt!
 
 function ruecksetzung() {
 	timer = setTimeout(change_back, 1300);
 }
+
+//Die Zeit wird zurück gesetz, damit der Automat sich nicht bewegt!
 
 function change_back(){
 	veraenderung.$data.zeit = 0;
