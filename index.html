@@ -24,9 +24,9 @@
 			<ul id="navbar">
 				<li class="navpoint"><a href="#home" class="navitem_logo">LEGIT</a></li>
 			
-					<li class="navitem" class="create" v-if="rechteSeite" v-on:click="switching">Witz schreiben</li>
+					<li class="navpoint" v-if="rechteSeite" v-on:click="switching"><span class="navitem_create">Witz schreiben</span></li>
 					
-					<li class="navitem" class="create" v-if="!(rechteSeite)" v-on:click="back_switching">Automat anzeigen</li>
+					<li class="navpoint" v-else v-on:click="back_switching"><span class="navitem_create">Automat anzeigen</span></li>
 					
 				<li v-for="category in categories" class="navpoint"><span class="navitem" v-on:click="wechsel(category.CategoryID)">{{ category.Category }}</span></li>
 				<li class="navpoint" id="username">USERNAME</li>			<!--Menuleiste oben-->

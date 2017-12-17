@@ -35,16 +35,6 @@ li{
 	float: left;
 }
 
-.create{
-	cursor: url('aero-middle-finger.cur'), pointer;
-	width: 10%;
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 
 .navitem_logo{
 	float: left;
@@ -59,6 +49,17 @@ li{
 
 }
 
+.navitem_create{
+	float: left;
+	color: white;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	width: 150px;
+    padding: 14px 16px 14px 16px;
+    font-family: 'PT Sans', sans-serif;
+}
+
 .navitem{
 	float: left;
 	color: white;
@@ -67,9 +68,10 @@ li{
 	text-align: center;
     padding: 14px 16px;
     font-family: 'PT Sans', sans-serif;
+
 }
 
-.navitem:hover{
+.navitem:hover, .navitem_create:hover{
 	background-color: #696969;
 	cursor: url('aero-middle-finger.cur'), pointer;
 	-webkit-touch-callout: none;
