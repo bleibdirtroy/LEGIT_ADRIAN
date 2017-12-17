@@ -44,9 +44,13 @@ li{
     font-family: 'Orbitron', sans-serif;
     font-size: 40px;
     text-decoration: none;
-    
-
-
+    cursor: url('aero-middle-finger.cur'), pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .navitem_create{

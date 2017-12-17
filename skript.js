@@ -13,6 +13,7 @@ var lustig = new Vue({
 	data: {
 		witze: [],
 		token: null,
+		active: true,
 	},
 
 	mounted: function(){
@@ -133,6 +134,10 @@ var category = new Vue({
 	},
 	methods: {
 
+		show_us(){
+			lustig.$data.active = true;
+		},
+
 		//Wechsel zum Feld "Witz schreiben" auf der Rechten seite beim Klick auf den Button in der Menüleiste
 
 		switching(){
@@ -158,8 +163,8 @@ var category = new Vue({
 			this.$http.get(joke_in_category_link + id )
 			.then(function(resp) {
 
-
 				lustig.$data.witze = resp.body.data;
+				lustig.$data.active = false;
 
 			})
 			.catch(function(resp){

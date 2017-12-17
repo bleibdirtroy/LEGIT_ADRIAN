@@ -22,12 +22,12 @@
 
 		<div class="navigation">
 			<ul id="navbar">
-				<li class="navpoint"><a href="#home" class="navitem_logo">LEGIT</a></li>
-			
-					<li class="navpoint" v-if="rechteSeite" v-on:click="switching"><span class="navitem_create">Witz schreiben</span></li>
-					
-					<li class="navpoint" v-else v-on:click="back_switching"><span class="navitem_create">Automat anzeigen</span></li>
-					
+				<li class="navpoint"><span class="navitem_logo" v-on:click="show_us">LEGIT</span></li>
+
+				<li class="navpoint" v-if="rechteSeite" v-on:click="switching"><span class="navitem_create">Witz schreiben</span></li>
+
+				<li class="navpoint" v-else v-on:click="back_switching"><span class="navitem_create">Automat anzeigen</span></li>
+
 				<li v-for="category in categories" class="navpoint"><span class="navitem" v-on:click="wechsel(category.CategoryID)">{{ category.Category }}</span></li>
 				<li class="navpoint" id="username">USERNAME</li>			<!--Menuleiste oben-->
 
@@ -37,22 +37,29 @@
 		<div id="rest">
 
 			<div class="witzspalte">
-				<div class="witze-div" v-for="witz in witze">
-					<table class="joke-tabelle">
+				<div class="Legit_team" v-if="active == true">
 
-						<tr>
-							<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="upvote(witz.JokeID)"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
-							<td>{{ witz.Content }}</td>
-							<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="downvote(witz.JokeID)"></i></td>
-						</tr>
-						<tr>
-							<td>{{ witz.Upvotes }}</td>
-							<td>Witz von <span class="button1">{{ witz.Username }}</span> am {{ witz.Date }}</td>
-							<td>{{ witz.Downvotes }}</td>
-						</tr>				
 
-					</table>		<!--Witze tabelle-->
-				</div> 			 <!--WitzeDiv-->
+
+				</div>
+				<div v-else>
+					<div class="witze-div" v-for="witz in witze">
+						<table class="joke-tabelle">
+
+							<tr>
+								<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="upvote(witz.JokeID)"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
+								<td>{{ witz.Content }}</td>
+								<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="downvote(witz.JokeID)"></i></td>
+							</tr>
+							<tr>
+								<td>{{ witz.Upvotes }}</td>
+								<td>Witz von <span class="button1">{{ witz.Username }}</span> am {{ witz.Date }}</td>
+								<td>{{ witz.Downvotes }}</td>
+							</tr>				
+
+						</table>		<!--Witze tabelle-->
+					</div> 			 <!--WitzeDiv-->
+				</div>
 			</div>			<!--linke hälfte mit witzen-->
 
 			<div class="rechts">
