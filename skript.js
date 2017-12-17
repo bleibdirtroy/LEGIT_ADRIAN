@@ -1,3 +1,10 @@
+var categries_link = 'https://legitjokes.herokuapp.com/api//categories';
+var random_joke_link = 'https://legitjokes.herokuapp.com/api/joke/random';
+var joke_in_category_link = 'https://legitjokes.herokuapp.com/api/joke?category='; //missing: example_category
+var submit_joke_link = 'https://legitjokes.herokuapp.com/api//joke/submit?content='; //missig: examplejoke$category=example_category
+var joke_vote_link = 'https://legitjokes.herokuapp.com/api/vote?id='; //missing: example_id(&vote=up or &vote=down)
+var change_coins_link = 'https://legitjokes.herokuapp.com/api/user/coins?type='; //missing: up or down
+
 
 //Vue für die linke Spalte in der die Witze stehen
 
@@ -15,7 +22,7 @@ var lustig = new Vue({
 
 		this.$data.token = "Bearer "
 
-				//this.$data.token = localStorage.getItem("token"); //hier Key von Amir einfügen!!
+				//this.$data.token = sessionStorage.getItem("token"); //hier Key von Amir einfügen!!
 				this.$data.token += "eyJhbGciOiJIUzI1NiJ9.TGl0X2JveTY5.EM2R45WtYCgJrIe0zcNPg9yStoEsSwEHudxWA9NlaB8"; //noch meiner
 				console.log(this.$data.token);
 
@@ -26,7 +33,7 @@ var lustig = new Vue({
 				//Wenn ein Witz Positiv bewertet wird
 
 				upvote(id){
-					this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=up',
+					this.$http.get(joke_vote_link + id + '&vote=up',
 					{
 						headers: {
 							'Authorization': this.$data.token,
@@ -37,7 +44,7 @@ var lustig = new Vue({
 						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
 
 						automat.$data.coins += 1;
-						this.$http.get('https://legitjokes.herokuapp.com/api/user/coins?type=up',
+						this.$http.get(change_coins_link + 'up',
 						{
 							headers: {
 								'Authorization': this.$data.token,
@@ -64,7 +71,7 @@ var lustig = new Vue({
 				//Wenn der Witz negativ bewertet wird
 
 				downvote(id){
-					this.$http.get('https://legitjokes.herokuapp.com/api/vote?id=' + id + '&vote=down',
+					this.$http.get(joke_vote_link + id + '&vote=down',
 					{
 						headers: {
 							'Authorization': this.$data.token,
@@ -76,7 +83,7 @@ var lustig = new Vue({
 						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
 
 						automat.$data.coins += 1;
-						this.$http.get('https://legitjokes.herokuapp.com/api/user/coins?type=up',
+						this.$http.get(change_coins_link + 'up',
 						{
 							headers: {
 								'Authorization': this.$data.token,
@@ -115,7 +122,7 @@ var category = new Vue({
 	//Kategorien werden vom Datenbank geladen
 
 	mounted: function() {
-		this.$http.get('https://legitjokes.herokuapp.com/api/categories')
+		this.$http.get(categries_link)
 		.then(function(resp) {
 			this.$data.categories = resp.body.data;
 		})
@@ -147,7 +154,7 @@ var category = new Vue({
 		wechsel(id){
 
 
-			this.$http.get('https://legitjokes.herokuapp.com/api/joke?category=' + id )
+			this.$http.get(joke_in_category_link + id )
 			.then(function(resp) {
 
 
@@ -173,7 +180,7 @@ var automat = new Vue({
 
 	data: {
 		zeit: 0,
-		coins: 6, //anpassen
+		coins: 0, //anpassen
 		random_witz: "Hallo user",
 		rechteSeite: true,
 
@@ -182,8 +189,10 @@ var automat = new Vue({
 
 
 	mounted: function(){
+
+
 		
-		//this.$data.coins = localStorage.getItem("coins"); //Coins von Amir
+		this.$data.coins =  3;//sessionStorage.getItem("coins"); //Coins von Amir
 
 	},
 
@@ -192,26 +201,43 @@ var automat = new Vue({
 		//Zufälliger Witz im Automaten wird von Datenbank ausgewählt
 
 		zufall(){
+			//movement of the machine
 			this.$data.zeit = 1;
-			ruecksetzung();
 
-      			//für unsere API:
+			if(this.$data.coins == 1){
+				ruecksetzung_short();
+			}else {
+				ruecksetzung_long();
+			}
+			
 
-      			this.$http.get('https://legitjokes.herokuapp.com/api/joke/random')
-      			.then(function(resp) {
+			//check if the user has enough coins
+			if(this.$data.coins > 0){
+
+				this.$http.get(random_joke_link)
+				.then(function(resp) {
+      				//show the joke on the screen
       				this.$data.random_witz = resp.body.data.Content
+      				//decrease coin on screen
+      				this.$data.coins -= 1;
+      				//decrease coin in database
+      				this.$http.get(change_coins_link + 'down',{
+      					headers: {
+      						'Authorization': lustig.$data.token,
+      					}
+      				})
+					//sessionStorage.setItem('coins', 'this.$data.coins');
+				})
 
+				//Failure
+				.catch(function(err) {
+					this.$data.random_witz = "Something went wrong: " + err
+				})		
+			}
+		},
+	}
 
-      	})
-
-      			.catch(function(err) {
-      				this.$data.random_witz = "Something went wrong: " + err
-      			})		
-      		}, 
-
-      	}
-
-      });
+});
 
 
 
@@ -219,8 +245,12 @@ var timer;
 
 //Der Timer für die Zeit in der der Automat seinen Hebel nach unten bewegt!
 
-function ruecksetzung() {
+function ruecksetzung_long() {
 	timer = setTimeout(change_back, 1300);
+}
+
+function ruecksetzung_short() {
+	timer = setTimeout(change_back, 1000);
 }
 
 //Die Zeit wird zurück gesetz, damit der Automat sich nicht bewegt!

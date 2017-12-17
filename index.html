@@ -61,11 +61,11 @@
 					<div v-if="(zeit == 0 && coins > 0)" class="hebel" v-on:click="zufall"></div>
 					<img v-if="(zeit == 0 && coins > 0)" class="automat" src="random/Automat_oben.jpg" alt="Automat hebel oben">
 					<img v-if="zeit > 0" class="automat" src="random/Automat.gif" alt="Automat in Bewegung"> 	<!--Automat mit Coins-->
-					<img v-if="coins == 0" class="automat" src="random/Automat_leer.jpg" alt="Automat ohne Geld"> <!--Automat ohne Coins-->
+					<img v-if="(zeit == 0 && coins == 0)" class="automat" src="random/Automat_leer.jpg" alt="Automat ohne Geld"> <!--Automat ohne Coins-->
 					<div v-if="zeit == 0" class="random_joke_feld">
 						{{ random_witz }}
 					</div>					<!-- Random witz im Automat-->
-					<div class="credit">10</div>
+					<div class="credit">{{ coins }}</div>
 
 
 				</div>		<!--Automat-->
