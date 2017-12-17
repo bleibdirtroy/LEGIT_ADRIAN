@@ -125,6 +125,7 @@ var category = new Vue({
 		this.$http.get(categries_link)
 		.then(function(resp) {
 			this.$data.categories = resp.body.data;
+			automat.$data.categories = resp.body.data;
 		})
 		.catch(function(err) {
 			this.$data.random_witz = "Something went wrong: " + err
@@ -173,7 +174,7 @@ var category = new Vue({
 
 })
 
-//Vue für den Automaten auf der rechten Seite
+//Vue für den Automaten und Textfeld auf der rechten Seite
 
 var automat = new Vue({
 	el: ".rechts",
@@ -183,6 +184,7 @@ var automat = new Vue({
 		coins: 0, //anpassen
 		random_witz: "Hallo user",
 		rechteSeite: true,
+		categories: [],
 
 		//coins = hier vom Server,
 	},
@@ -190,8 +192,6 @@ var automat = new Vue({
 
 	mounted: function(){
 
-
-		
 		this.$data.coins =  3;//sessionStorage.getItem("coins"); //Coins von Amir
 
 	},
@@ -206,7 +206,7 @@ var automat = new Vue({
 
 			if(this.$data.coins == 1){
 				ruecksetzung_short();
-			}else {
+			} else {
 				ruecksetzung_long();
 			}
 			
