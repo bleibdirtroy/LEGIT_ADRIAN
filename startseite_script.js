@@ -246,9 +246,6 @@ var automat = new Vue({
 
 		submit_joke(){
 
-			this.$data.test = $Spelling.SpellCheckSuggest(this.$data.joke);
-
-
 
 		},
 	}
