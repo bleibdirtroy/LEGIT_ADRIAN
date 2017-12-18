@@ -267,11 +267,10 @@ var automat = new Vue({
 					this.$data.letter_movement = true;
 					setTimeout(function(){
 						automat.$data.letter_movement = false;
-					}, 5000);
+					}, 1200);
 					setTimeout(function(){
-
-
-					},500);
+					}, 1500);
+					
 
 
 

@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="startseite_style.css" type="text/css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/vue" ></script>
@@ -92,17 +93,19 @@
 					<div class="letters">
 
 						<img src="random/letter_opened.jpg" class="letter" v-if="!(letter_movement)">
-					
-							<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement">
-					
+						<transition  name="letter_transition"
+						enter-active-class="animated tada"
+						leave-active-class="animated bounceOutRight" appear>
+						<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement">
+					</transition>
 
-
-					</div>
 
 				</div>
 
-			</div>			<!--rechte hälfte für Random witze-->
+			</div>
 
-		</div>			<!--Rest unter der Menuleiste-->
-	</div>
+		</div>			<!--rechte hälfte für Random witze-->
+
+	</div>			<!--Rest unter der Menuleiste-->
+</div>
 </body>
