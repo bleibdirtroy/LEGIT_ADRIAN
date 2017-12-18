@@ -6,8 +6,10 @@
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
 	<link rel="stylesheet" href="startseite_style.css" type="text/css">
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src='/JavaScriptSpellCheck/include.js' ></script>
 	<script src="https://unpkg.com/vue" ></script>
 	<script src="https://unpkg.com/vue-resource" ></script>
 	<script src="https://unpkg.com/vue-router/dist/vue-router.js" ></script>
@@ -78,15 +80,15 @@
 				</div>		<!--Automat-->
 
 				<div class="Witz_schreiben" v-else>
-					<textarea spellcheck="true" placeholder="Hier Witz eingeben" value="">
+					<textarea spellcheck="true" placeholder="Hier Witz eingeben" value="" v-model="joke">
 					</textarea>
-					<button>In <span class="button1">LEGIT</span> posten?</button>
+					<button v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
 					<select class="select_categroy">
 						<option value="Kategorie auswählen" disabled selected>Kategorie auswählen</option>
 						<option v-bind:value="category" v-for="category in categories">{{ category.Category }}</option>
 					</select>
-
-
+					<br>
+					<img src="random/select_category.png">
 
 				</div>
 

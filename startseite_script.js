@@ -187,9 +187,11 @@ var automat = new Vue({
 	data: {
 		zeit: 0,
 		coins: 0, //anpassen
-		random_witz: "Hallo user",
+		random_witz: "Schau in einen Spiegel, da kannst du auch lachen",
 		rechteSeite: true,
 		categories: [],
+		joke: "",
+		test: false,
 
 		//coins = hier vom Server,
 	},
@@ -204,6 +206,7 @@ var automat = new Vue({
 	methods: {
 
 		//Zufälliger Witz im Automaten wird von Datenbank ausgewählt
+
 
 		zufall(){
 			//movement of the machine
@@ -240,11 +243,22 @@ var automat = new Vue({
 				})		
 			}
 		},
+
+		submit_joke(){
+
+			this.$data.test = $Spelling.SpellCheckSuggest(this.$data.joke);
+
+
+
+		},
 	}
 
 });
 
 
+
+
+//var FormSpellingValid = $Spelling.SpellCheckSuggest("textrea1,textarea2,textinput1") // true or false
 
 var timer;
 
@@ -263,4 +277,3 @@ function ruecksetzung_short() {
 function change_back(){
 	automat.$data.zeit = 0;
 }
-

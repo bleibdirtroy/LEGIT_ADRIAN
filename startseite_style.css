@@ -179,7 +179,7 @@ td{
 .random_joke_feld{
 	position: absolute;
 	top: 39%;
-	left: 32%;
+	left: 33%;
 	height: 140px;
 	width: 250px;
 	color: white;
@@ -243,3 +243,4 @@ button {
      cursor: url('aero-middle-finger.cur'), pointer;
 
 }
+
