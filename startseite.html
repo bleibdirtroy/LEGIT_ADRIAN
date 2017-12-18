@@ -82,13 +82,12 @@
 					<textarea spellcheck="true" placeholder="Hier Witz eingeben" value="" v-model="joke">
 					</textarea>
 					<button v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
-					<select class="select_categroy">
-						<option value="Kategorie auswählen" disabled selected>Kategorie auswählen</option>
-						<option v-bind:value="category" v-for="category in categories">{{ category.Category }}</option>
+					<select class="select_categroy" v-model="selected_category">
+						<option value="Kategorie auswählen" selected disabled>Kategorie auswählen</option>
+						<option v-for="category in categories" v-bind:value="category.Category">{{ category.Category }}</option>
 					</select>
 					<br>
 					<img src="random/select_category.png">
-
 				</div>
 
 			</div>			<!--rechte hälfte für Random witze-->

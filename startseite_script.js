@@ -1,7 +1,7 @@
 var categries_link = 'https://legitjokes.herokuapp.com/api//categories';
 var random_joke_link = 'https://legitjokes.herokuapp.com/api/joke/random';
 var joke_in_category_link = 'https://legitjokes.herokuapp.com/api/joke?category='; //missing: example_category
-var submit_joke_link = 'https://legitjokes.herokuapp.com/api//joke/submit?content='; //missig: examplejoke$category=example_category
+var submit_joke_link = 'https://legitjokes.herokuapp.com/api//joke/submit'; //missig: examplejoke$category=example_category
 var joke_vote_link = 'https://legitjokes.herokuapp.com/api/vote?id='; //missing: example_id(&vote=up or &vote=down)
 var change_coins_link = 'https://legitjokes.herokuapp.com/api/user/coins?type='; //missing: up or down
 
@@ -191,8 +191,7 @@ var automat = new Vue({
 		rechteSeite: true,
 		categories: [],
 		joke: "",
-		test: false,
-
+		selected_category: "Kategorie auswählen",
 		//coins = hier vom Server,
 	},
 
@@ -245,6 +244,25 @@ var automat = new Vue({
 		},
 
 		submit_joke(){
+
+			if(this.selected_category == "Kategorie auswählen"){
+				this.selected_category = "opa";
+
+			}
+			else {
+				this.$http.post(submit_joke_link,
+					{
+						content: this.$data.joke,
+						category: this.$data.selected_category,
+
+					},
+      					headers: {
+      						'Authorization': lustig.$data.token,
+      					}
+      				)
+
+
+			}
 
 
 		},
