@@ -25,7 +25,6 @@ var lustig = new Vue({
 
 				//this.$data.token = sessionStorage.getItem("token"); //hier Key von Amir einfügen!!
 				this.$data.token += "eyJhbGciOiJIUzI1NiJ9.TGl0X2JveTY5.EM2R45WtYCgJrIe0zcNPg9yStoEsSwEHudxWA9NlaB8"; //noch meiner
-				console.log(this.$data.token);
 
 			},
 
@@ -179,6 +178,8 @@ var category = new Vue({
 
 })
 
+var trial_counter = 1;
+
 //Vue für den Automaten und Textfeld auf der rechten Seite
 
 var automat = new Vue({
@@ -192,6 +193,7 @@ var automat = new Vue({
 		categories: [],
 		joke: "",
 		selected_category: "Kategorie auswählen",
+		active: false,
 		//coins = hier vom Server,
 	},
 
@@ -202,6 +204,7 @@ var automat = new Vue({
 
 	},
 
+	
 	methods: {
 
 		//Zufälliger Witz im Automaten wird von Datenbank ausgewählt
@@ -246,22 +249,37 @@ var automat = new Vue({
 		submit_joke(){
 
 			if(this.selected_category == "Kategorie auswählen"){
-				this.selected_category = "opa";
+				this.$data.active = true;
+				setTimeout(function(){automat.$data.active = false; }, 500);
 
 			}
 			else {
+				if(this.$data.joke.length <= 15){ //if the "joke" is too short
+					if(trial_counter == 1){
+					trial_counter += 1;
+					this.$data.joke = "Das ist kein Witz";
+				} else{
+					this.$data.joke = "IMMER NOCH KEIN WITZ!!!";
+				}
+
+				} else{
+
 				this.$http.post(submit_joke_link,
 					{
 						content: this.$data.joke,
-						category: this.$data.selected_category,
+						category: this.$data.selected_category,  //Category ID nicht STRING
 
-					},
+					},{
       					headers: {
       						'Authorization': lustig.$data.token,
       					}
+      				}
       				)
+				.then(function(resp){
+					console.log("hi")
+				})
 
-
+			}
 			}
 
 

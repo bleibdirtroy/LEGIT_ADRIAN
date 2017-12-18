@@ -84,10 +84,19 @@
 					<button v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
 					<select class="select_categroy" v-model="selected_category">
 						<option value="Kategorie auswählen" selected disabled>Kategorie auswählen</option>
-						<option v-for="category in categories" v-bind:value="category.Category">{{ category.Category }}</option>
+						<option v-for="category in categories" v-bind:value="category.CategoryID">{{ category.Category }}</option>
 					</select>
 					<br>
-					<img src="random/select_category.png">
+					<img src="random/select_category.png" v-bind:class="{ category_arrow: active }">
+
+					<div class="letters">
+
+						<img src="random/letter_opened.jpg">
+						<img src="random/letter_closed.jpg">
+
+
+					</div>
+
 				</div>
 
 			</div>			<!--rechte hälfte für Random witze-->
