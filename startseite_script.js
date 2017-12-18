@@ -194,7 +194,7 @@ var automat = new Vue({
 		joke: "",
 		selected_category: "Kategorie auswählen",
 		active: false,
-		//coins = hier vom Server,
+		letter_movement: false,
 	},
 
 
@@ -264,7 +264,18 @@ var automat = new Vue({
 
 				} else{
 
-				this.$http.post(submit_joke_link,
+					this.$data.letter_movement = true;
+					setTimeout(function(){
+						automat.$data.letter_movement = false;
+					}, 5000);
+					setTimeout(function(){
+
+
+					},500);
+
+
+
+				/*this.$http.post(submit_joke_link,
 					{
 						content: this.$data.joke,
 						category: this.$data.selected_category,  //Category ID nicht STRING
@@ -277,7 +288,7 @@ var automat = new Vue({
       				)
 				.then(function(resp){
 					console.log("hi")
-				})
+				})*/
 
 			}
 			}

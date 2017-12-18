@@ -91,8 +91,10 @@
 
 					<div class="letters">
 
-						<img src="random/letter_opened.jpg">
-						<img src="random/letter_closed.jpg">
+						<img src="random/letter_opened.jpg" class="letter" v-if="!(letter_movement)">
+					
+							<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement">
+					
 
 
 					</div>
