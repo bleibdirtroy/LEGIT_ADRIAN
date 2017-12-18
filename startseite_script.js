@@ -270,11 +270,8 @@ var automat = new Vue({
 					}, 1200);
 					setTimeout(function(){
 					}, 1500);
-					
 
-
-
-				/*this.$http.post(submit_joke_link,
+				this.$http.post(submit_joke_link,
 					{
 						content: this.$data.joke,
 						category: this.$data.selected_category,  //Category ID nicht STRING
@@ -286,8 +283,10 @@ var automat = new Vue({
       				}
       				)
 				.then(function(resp){
-					console.log("hi")
-				})*/
+					this.$data.joke = "";
+
+
+				})
 
 			}
 			}
