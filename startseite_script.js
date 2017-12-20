@@ -32,14 +32,18 @@ var lustig = new Vue({
 
 				//Wenn ein Witz Positiv bewertet wird
 
-				upvote(id){
-					this.$http.get(joke_vote_link + id + '&vote=up',
+				upvote(witz){
+					this.$http.get(joke_vote_link + witz.JokeID + '&vote=up',
 					{
 						headers: {
 							'Authorization': this.$data.token,
 						}
 					})
 					.then(function(resp){
+
+
+						if(resp.body.Status == "Ok"){
+							witz.Upvotes += 1;
 
 						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
 
@@ -59,8 +63,11 @@ var lustig = new Vue({
 						})
 
 
-						console.log(resp);
-					})
+						 
+
+					}
+
+				})
 					.catch(function(err){
 						console.log(err);
 						console.log("fehler in upvote");
@@ -70,8 +77,8 @@ var lustig = new Vue({
 
 				//Wenn der Witz negativ bewertet wird
 
-				downvote(id){
-					this.$http.get(joke_vote_link + id + '&vote=down',
+				downvote(witz){
+					this.$http.get(joke_vote_link + witz.JokeID + '&vote=down',
 					{
 						headers: {
 							'Authorization': this.$data.token,
@@ -79,7 +86,11 @@ var lustig = new Vue({
 						}
 					})
 					.then(function(resp){
-						
+
+						if(resp.body.Status == "Ok"){
+
+							witz.Downvotes += 1;
+
 						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
 
 						automat.$data.coins += 1;
@@ -99,7 +110,9 @@ var lustig = new Vue({
 
 
 						console.log(resp);
-					})
+
+					}
+				})
 					.catch(function(err){
 						console.log(err);
 						console.log("fehler downvote");
@@ -256,11 +269,11 @@ var automat = new Vue({
 			else {
 				if(this.$data.joke.length <= 15){ //if the "joke" is too short
 					if(trial_counter == 1){
-					trial_counter += 1;
-					this.$data.joke = "Das ist kein Witz";
-				} else{
-					this.$data.joke = "IMMER NOCH KEIN WITZ!!!";
-				}
+						trial_counter += 1;
+						this.$data.joke = "Das ist kein Witz";
+					} else{
+						this.$data.joke = "IMMER NOCH KEIN WITZ!!!";
+					}
 
 				} else{
 
@@ -271,24 +284,24 @@ var automat = new Vue({
 					setTimeout(function(){
 					}, 1500);
 
-				this.$http.post(submit_joke_link,
+					this.$http.post(submit_joke_link,
 					{
 						content: this.$data.joke,
 						category: this.$data.selected_category,  //Category ID nicht STRING
 
 					},{
-      					headers: {
-      						'Authorization': lustig.$data.token,
-      					}
-      				}
-      				)
-				.then(function(resp){
-					this.$data.joke = "";
+						headers: {
+							'Authorization': lustig.$data.token,
+						}
+					}
+					)
+					.then(function(resp){
+						this.$data.joke = "";
 
 
-				})
+					})
 
-			}
+				}
 			}
 
 

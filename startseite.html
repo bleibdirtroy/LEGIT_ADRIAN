@@ -49,9 +49,9 @@
 						<table class="joke-tabelle">
 
 							<tr>
-								<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="upvote(witz.JokeID)"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
+								<td class="smiley"><i  class="fa fa-smile-o" aria-hidden="ture" v-on:click="upvote(witz)"></i></td> <!--Hier mit id des witze die bewertung durchführen-->
 								<td>{{ witz.Content }}</td>
-								<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="downvote(witz.JokeID)"></i></td>
+								<td class="smiley"><i class="fa fa-meh-o"  aria-hidden="true" v-on:click="downvote(witz)"></i></td>
 							</tr>
 							<tr>
 								<td>{{ witz.Upvotes }}</td>
