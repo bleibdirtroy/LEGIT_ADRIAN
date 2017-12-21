@@ -95,9 +95,20 @@ li{
     float:right;
 }
 
+
 #rest{
 	padding-top: 70px;
 }
+
+.Legit_team{
+	height: 100%;
+	width: 100%;
+}
+
+
+
+
+
 
 .smiley{					/*Bewertungs-smileys neben den witzen*/
 	font-size: 40px;
@@ -108,6 +119,7 @@ li{
 }
 
 .smiley:hover { transform: scale(1.7); }			/*vergrößern der Smileys beim hovern*/
+
 
 
 .witzspalte{			/*linke Hälfte für witze*/

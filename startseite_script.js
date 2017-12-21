@@ -267,7 +267,7 @@ var automat = new Vue({
 
 			}
 			else {
-				if(this.$data.joke.length <= 15){ //if the "joke" is too short
+				if(this.$data.joke.length <= 15 ){ //if the "joke" is too short
 					if(trial_counter == 1){
 						trial_counter += 1;
 						this.$data.joke = "Das ist kein Witz";
@@ -287,7 +287,7 @@ var automat = new Vue({
 					this.$http.post(submit_joke_link,
 					{
 						content: this.$data.joke,
-						category: this.$data.selected_category,  //Category ID nicht STRING
+						category: this.$data.selected_category,
 
 					},{
 						headers: {
@@ -310,10 +310,6 @@ var automat = new Vue({
 
 });
 
-
-
-
-//var FormSpellingValid = $Spelling.SpellCheckSuggest("textrea1,textarea2,textinput1") // true or false
 
 var timer;
 
