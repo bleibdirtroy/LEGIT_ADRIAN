@@ -56,7 +56,7 @@ var lustig = new Vue({
 							}
 						})
 						.then(function(resp){
-							console.log(resp);
+							this.$refs.coin_sound.play();
 						})
 						.catch(function(err){
 							console.log("FEHLER in coins");
@@ -102,7 +102,7 @@ var lustig = new Vue({
 							}
 						})
 						.then(function(resp){
-							console.log(resp);
+							this.$refs.coin_sound.play();
 						})
 						.catch(function(err){
 							console.log("FEHLER in coins");
