@@ -43,6 +43,7 @@ var lustig = new Vue({
 
 
 						if(resp.body.Status == "Ok"){
+							this.$refs.coin_sound.play();
 							witz.Upvotes += 1;
 
 						//Um die Anzahl der Coins für einen User zu erhöhen für die Bewertung
@@ -56,10 +57,10 @@ var lustig = new Vue({
 							}
 						})
 						.then(function(resp){
-							this.$refs.coin_sound.play();
+							
 						})
 						.catch(function(err){
-							console.log("FEHLER in coins");
+							this.$refs.fail_sound.play();
 						})
 
 
@@ -69,8 +70,7 @@ var lustig = new Vue({
 
 				})
 					.catch(function(err){
-						console.log(err);
-						console.log("fehler in upvote");
+						
 					})
 
 				},
@@ -88,6 +88,7 @@ var lustig = new Vue({
 					.then(function(resp){
 
 						if(resp.body.Status == "Ok"){
+							this.$refs.coin_sound.play();
 
 							witz.Downvotes += 1;
 
@@ -102,20 +103,19 @@ var lustig = new Vue({
 							}
 						})
 						.then(function(resp){
-							this.$refs.coin_sound.play();
+							
 						})
 						.catch(function(err){
-							console.log("FEHLER in coins");
+							this.$refs.fail_sound.play();
 						})
 
 
-						console.log(resp);
+						
 
 					}
 				})
 					.catch(function(err){
-						console.log(err);
-						console.log("fehler downvote");
+						
 					})
 				},	
 			},			

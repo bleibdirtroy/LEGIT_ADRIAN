@@ -63,7 +63,8 @@
 						</table>		<!--Witze tabelle-->
 					</div> 			 <!--WitzeDiv-->
 				</div>
-				<audio ref="coin_sound" src="https://freesound.org/data/previews/242/242857_4284968-lq.mp3"></audio>
+				<audio ref="coin_sound" src="random/coin_sound.mp3"></audio>
+				<audio ref="coin_fail" src="random/fail_sound.mp3"></audio>
 			</div>			<!--linke hälfte mit witzen-->
 
 			<div class="rechts">
@@ -76,6 +77,7 @@
 					<div v-if="zeit == 0" class="random_joke_feld">
 						{{ random_witz }}
 					</div>					<!-- Random witz im Automat-->
+					
 					<div class="credit">{{ coins }}</div>
 
 
@@ -84,12 +86,16 @@
 				<div class="Witz_schreiben" v-else>
 					<textarea spellcheck="true" placeholder="Hier Witz eingeben" value="" v-model="joke">
 					</textarea>
+
 					<button v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
+
 					<select class="select_categroy" v-model="selected_category">
 						<option value="Kategorie auswählen" selected disabled>Kategorie auswählen</option>
 						<option v-for="category in categories" v-bind:value="category.CategoryID">{{ category.Category }}</option>
 					</select>
+
 					<br>
+
 					<img src="random/select_category.png" v-bind:class="{ category_arrow: active }">
 
 					<div class="letters">
