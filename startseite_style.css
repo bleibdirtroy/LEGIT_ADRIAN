@@ -279,3 +279,8 @@ button {
 	padding: 90px 200px;
 	position: absolute;
 }
+
+.house{
+	height: 100%;
+	width: 100%;
+}

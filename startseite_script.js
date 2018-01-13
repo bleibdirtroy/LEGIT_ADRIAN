@@ -14,6 +14,7 @@ var lustig = new Vue({
 		witze: [],
 		token: null,
 		active: true,
+		no_connection_vid: false,
 	},
 
 	mounted: function(){
@@ -70,6 +71,7 @@ var lustig = new Vue({
 
 				})
 					.catch(function(err){
+						this.$refs.fail_sound.play();
 						
 					})
 
@@ -115,6 +117,7 @@ var lustig = new Vue({
 					}
 				})
 					.catch(function(err){
+						this.$refs.fail_sound.play();
 						
 					})
 				},	
@@ -128,7 +131,7 @@ var category = new Vue({
 	el: ".navigation",
 
 	data: {
-		categories: [], //Array mit den JSON daten von den Kategorien
+		categories: [], 
 		rechteSeite: true,
 	},
 
@@ -141,7 +144,10 @@ var category = new Vue({
 			automat.$data.categories = resp.body.data;
 		})
 		.catch(function(err) {
-			this.$data.random_witz = "Something went wrong: " + err
+			this.$data.categories[0].Category = automat.$data.categories[0].Category = "Da ist wohl";
+			this.$data.categories[1].Category = automat.$data.categories[1].Category = "wer über das";
+			this.$data.categories[2].Category = automat.$data.categories[2].Category = "WLAN-Kabel";
+			this.$data.categories[3].Category = automat.$data.categories[3].Category = "gestolpert";
 		})		
 	},
 	methods: {
@@ -180,7 +186,12 @@ var category = new Vue({
 
 			})
 			.catch(function(resp){
-				lustig.$data.witze = "Something went wrong: " + err
+
+				//witze entfernen und video anzeigen das man keine Verbindung hat
+				lustig.$data.no_connection_vid = true;
+				lustig.$data.active = false;
+				lustig.$data.witze = null;
+
 			})
 		}
 
@@ -277,12 +288,7 @@ var automat = new Vue({
 
 				} else{
 
-					this.$data.letter_movement = true;
-					setTimeout(function(){
-						automat.$data.letter_movement = false;
-					}, 1200);
-					setTimeout(function(){
-					}, 1500);
+				
 
 					this.$http.post(submit_joke_link,
 					{
@@ -297,7 +303,17 @@ var automat = new Vue({
 					)
 					.then(function(resp){
 						this.$data.joke = "";
+						this.$data.letter_movement = true;
+						setTimeout(function(){
+							automat.$data.letter_movement = false;
+						}, 1200);
+						setTimeout(function(){
+						}, 1500);
 
+
+					})
+					.catch(function(err){
+					alert("No Connection to the server :(");
 
 					})
 
