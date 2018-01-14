@@ -6,7 +6,10 @@ var joke_vote_link = 'https://legitjokes.herokuapp.com/api/vote?id='; //missing:
 var change_coins_link = 'https://legitjokes.herokuapp.com/api/user/coins?type='; //missing: up or down
 
 
+
 //Vue für die linke Spalte in der die Witze stehen
+
+
 
 var lustig = new Vue({
 	el: ".witzspalte",
@@ -183,6 +186,7 @@ var category = new Vue({
 
 				lustig.$data.witze = resp.body.data;
 				lustig.$data.active = false;
+				lustig.$data.no_connection_vid = false;
 
 			})
 			.catch(function(resp){
@@ -344,3 +348,5 @@ function ruecksetzung_short() {
 function change_back(){
 	automat.$data.zeit = 0;
 }
+
+

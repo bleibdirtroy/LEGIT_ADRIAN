@@ -100,11 +100,11 @@
 
 					<div class="letters">
 
-						<img src="random/letter_opened.jpg" class="letter" v-if="!(letter_movement)">
+						<img src="random/letter_opened.jpg" class="letter" v-if="!(letter_movement)" alt="letter open">
 						<transition  name="letter_transition"
 						enter-active-class="animated tada"
 						leave-active-class="animated bounceOutRight" appear>
-						<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement">
+						<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement" alt="letter closed">
 					</transition>
 
 
