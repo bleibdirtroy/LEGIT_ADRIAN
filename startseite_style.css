@@ -229,7 +229,21 @@ textarea{
   transform: translateY(30px);
 }
 
-button {
+.logout_button{
+	border: none;
+	background: none;
+	float: left;
+	color: white;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 17px;
+     cursor: url('aero-middle-finger.cur'), pointer;
+
+}
+
+.joke_submit_button {
     background-color: white; 
     font-family: 'PT Sans', sans-serif;
     border: none;
@@ -249,7 +263,7 @@ button {
 .select_categroy {
 	background-color: white; 
 	 font-family: 'PT Sans', sans-serif;
-	  font-size: 17px;
+	 font-size: 17px;
    	 margin: 4px 7px;
      padding: 15px 32px;
      cursor: url('aero-middle-finger.cur'), pointer;

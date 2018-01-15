@@ -31,7 +31,7 @@
 				<li class="navpoint" v-else v-on:click="back_switching"><span class="navitem_create">Automat anzeigen</span></li>
 
 				<li v-for="category in categories" class="navpoint"><span class="navitem" v-on:click="wechsel(category.CategoryID)">{{ category.Category }}</span></li>
-				<li class="navpoint" id="username">Logout</li>			<!--Menuleiste oben-->
+				<li class="navpoint" id="username"><a href="index.html" class="logout_button">Logout</a></li>			<!--Menuleiste oben-->
 
 			</ul>
 		</div>
@@ -87,7 +87,7 @@
 					<textarea spellcheck="true" placeholder="Hier Witz eingeben" value="" v-model="joke">
 					</textarea>
 
-					<button v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
+					<button class="joke_submit_button" v-on:click="submit_joke">In <span class="button1">LEGIT</span> posten?</button>
 
 					<select class="select_categroy" v-model="selected_category">
 						<option value="Kategorie auswählen" selected disabled>Kategorie auswählen</option>
