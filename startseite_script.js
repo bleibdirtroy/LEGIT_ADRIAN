@@ -27,8 +27,8 @@ var lustig = new Vue({
 
 		this.$data.token = "Bearer "
 
-				//this.$data.token = sessionStorage.getItem("token"); //hier Key von Amir einfügen!!
-				this.$data.token += "eyJhbGciOiJIUzI1NiJ9.TGl0X2JveTY5.EM2R45WtYCgJrIe0zcNPg9yStoEsSwEHudxWA9NlaB8"; //noch meiner
+				this.$data.token = sessionStorage.getItem("token"); //hier Key von Amir einfügen!!
+				//this.$data.token += "eyJhbGciOiJIUzI1NiJ9.TGl0X2JveTY5.EM2R45WtYCgJrIe0zcNPg9yStoEsSwEHudxWA9NlaB8"; //noch meiner
 
 			},
 
@@ -228,7 +228,8 @@ var automat = new Vue({
 
 	mounted: function(){
 
-		this.$data.coins =  3;//sessionStorage.getItem("coins"); //Coins von Amir
+		//this.$data.coins =  3;
+		sessionStorage.getItem("coins"); //Coins von Amir
 
 	},
 
@@ -264,7 +265,7 @@ var automat = new Vue({
       						'Authorization': lustig.$data.token,
       					}
       				})
-					//sessionStorage.setItem('coins', 'this.$data.coins');
+					sessionStorage.setItem('coins', 'this.$data.coins');
 				})
 
 				//Failure

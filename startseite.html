@@ -40,11 +40,11 @@
 
 			<div class="witzspalte">
 				<div v-if="active == true">
-					<img src="random/wir.png" alt="Picture of us" class="Legit_team">
+					<img src="media/wir.png" alt="Picture of us" class="Legit_team">
 					
 				</div>
 				<div v-else>
-					<video v-if="no_connection_vid" class="house" src="random/house.mp4" autoplay></video>
+					<video v-if="no_connection_vid" class="house" src="media/house.mp4" autoplay></video>
 
 					<div class="witze-div" v-for="witz in witze">
 						<table class="joke-tabelle">
@@ -63,17 +63,17 @@
 						</table>		<!--Witze tabelle-->
 					</div> 			 <!--WitzeDiv-->
 				</div>
-				<audio ref="coin_sound" src="random/coin_sound.mp3"></audio>
-				<audio ref="fail_sound" src="random/fail_sound.mp3"></audio>
+				<audio ref="coin_sound" src="media/coin_sound.mp3"></audio>
+				<audio ref="fail_sound" src="media/fail_sound.mp3"></audio>
 			</div>			<!--linke hälfte mit witzen-->
 
 			<div class="rechts">
 				<div class="container" v-if="rechteSeite">
 
 					<div v-if="(zeit == 0 && coins > 0)" class="hebel" v-on:click="zufall"></div>
-					<img v-if="(zeit == 0 && coins > 0)" class="automat" src="random/Automat_oben.jpg" alt="Automat hebel oben">
-					<img v-if="zeit > 0" class="automat" src="random/Automat.gif" alt="Automat in Bewegung"> 	<!--Automat mit Coins-->
-					<img v-if="(zeit == 0 && coins == 0)" class="automat" src="random/Automat_leer.jpg" alt="Automat ohne Geld"> <!--Automat ohne Coins-->
+					<img v-if="(zeit == 0 && coins > 0)" class="automat" src="media/Automat_oben.jpg" alt="Automat hebel oben">
+					<img v-if="zeit > 0" class="automat" src="media/Automat.gif" alt="Automat in Bewegung"> 	<!--Automat mit Coins-->
+					<img v-if="(zeit == 0 && coins == 0)" class="automat" src="media/Automat_leer.jpg" alt="Automat ohne Geld"> <!--Automat ohne Coins-->
 					<div v-if="zeit == 0" class="random_joke_feld">
 						{{ random_witz }}
 					</div>					<!-- Random witz im Automat-->
@@ -96,15 +96,15 @@
 
 					<br>
 
-					<img src="random/select_category.png" v-bind:class="{ category_arrow: active }">
+					<img src="media/select_category.png" v-bind:class="{ category_arrow: active }">
 
 					<div class="letters">
 
-						<img src="random/letter_opened.jpg" class="letter" v-if="!(letter_movement)" alt="letter open">
+						<img src="media/letter_opened.jpg" class="letter" v-if="!(letter_movement)" alt="letter open">
 						<transition  name="letter_transition"
 						enter-active-class="animated tada"
 						leave-active-class="animated bounceOutRight" appear>
-						<img src="random/letter_closed.jpg" class="letter" v-if="letter_movement" alt="letter closed">
+						<img src="media/letter_closed.jpg" class="letter" v-if="letter_movement" alt="letter closed">
 					</transition>
 
 
